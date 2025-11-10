@@ -19,10 +19,11 @@
 
   body {
     @apply antialiased;
+    background: #0a0a0b;
   }
 }
 
-/* Custom utility classes for shadcn/ui patterns */
+/* Motion primitives */
 @layer utilities {
   .animate-in {
     animation-name: animateIn;
@@ -43,4 +44,50 @@
     --tw-exit-translate-x: initial;
     --tw-exit-translate-y: initial;
   }
+
+  /* Scroll reveal helper */
+  .will-reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal { opacity: 1; transform: translateY(0); }
+
+  /* Lava vibe backgrounds */
+  .lava-gradient {
+    background: radial-gradient(1200px 600px at 20% 10%, rgba(255,80,60,.35), transparent 60%),
+                radial-gradient(1000px 500px at 80% 20%, rgba(255,180,60,.25), transparent 60%),
+                radial-gradient(900px 600px at 50% 90%, rgba(255,50,90,.2), transparent 60%);
+    filter: saturate(120%);
+  }
+
+  .lava-blob {
+    position: absolute;
+    width: 40vw;
+    aspect-ratio: 1 / 1;
+    background: radial-gradient(closest-side, rgba(255,90,60,.35), transparent 65%);
+    filter: blur(40px) saturate(120%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: lavaFloat 18s ease-in-out infinite alternate;
+  }
+
+  .lava-blob--amber { background: radial-gradient(closest-side, rgba(255,170,60,.28), transparent 65%); }
+  .lava-blob--red { background: radial-gradient(closest-side, rgba(255,60,80,.32), transparent 65%); }
+
+  .glow-ring {
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset,
+                0 0 24px rgba(255,80,60,.15),
+                0 0 48px rgba(255,140,60,.1);
+  }
+
+  .cta-pulse { animation: ctaPulse 2.6s ease-in-out infinite; }
+}
+
+/* Keyframes */
+@keyframes lavaFloat {
+  0%   { transform: translate3d(-10%, -6%, 0) scale(1); }
+  50%  { transform: translate3d(5%, 4%, 0) scale(1.08); }
+  100% { transform: translate3d(-6%, 8%, 0) scale(0.96); }
+}
+
+@keyframes ctaPulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(255,90,60,.0)); }
+  50% { filter: drop-shadow(0 0 24px rgba(255,120,60,.35)); }
 }
