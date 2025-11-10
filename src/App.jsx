@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 function App() {
   useEffect(() => {
-    // Enable smooth scroll for same-page anchors
     if (typeof window !== 'undefined') {
       document.documentElement.style.scrollBehavior = 'smooth'
     }
@@ -14,6 +13,43 @@ function App() {
     { id: 'shows', label: 'Концерты' },
     { id: 'riders', label: 'Райдеры' },
     { id: 'contacts', label: 'Контакты' },
+  ]
+
+  const lineup = [
+    { name: 'Юлия Дегтева', role: 'вокал' },
+    { name: 'Алексей Андреев', role: 'вокал, гитара' },
+    { name: 'Самир Ахмедов', role: 'вокал, электрогитара' },
+    { name: 'Руслан Мавлянов', role: 'вокал, клавиши' },
+    { name: 'Валерий Логвиненко', role: 'бас-гитара' },
+    { name: 'Эмин Иманов', role: 'ударные' },
+    { name: 'Максим Князев', role: 'звукорежиссёр' },
+  ]
+
+  const gallery = [
+    'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?q=80&w=1200&auto=format&fit=crop',
+  ]
+
+  const videoItems = [
+    { type: 'youtube', id: '2vjPBrBU-TM', venue: 'Live Club', city: 'Баку', date: '2024' },
+    { type: 'youtube', id: 'JGwWNGJdvx8', venue: 'City Stage', city: 'Баку', date: '2024' },
+    { type: 'link', platform: 'Instagram', url: 'https://instagram.com/bir_manat_band', venue: 'Backstage', city: 'Баку', date: '—' },
+    { type: 'link', platform: 'TikTok', url: 'https://tiktok.com/@bir_manat_band', venue: 'Clips', city: '—', date: '—' },
+    { type: 'link', platform: 'YouTube', url: 'https://youtube.com/@bir_manat_band', venue: 'Channel', city: '—', date: '—' },
+  ]
+
+  const upcoming = [
+    { date: 'ПТ · 22 Ноя 2024', city: 'Баку', venue: 'The Club Venue', links: {} },
+    { date: 'СБ · 14 Дек 2024', city: 'Баку', venue: 'City Stage', links: {} },
+  ]
+
+  const past = [
+    { date: 'СБ · 28 Сен 2024', city: 'Баку', venue: 'Seaside Fest', links: { photos: '#', youtube: '#', instagram: '#' } },
+    { date: 'ПТ · 06 Сен 2024', city: 'Баку', venue: 'Bar 12', links: { photos: '#', instagram: '#' } },
   ]
 
   return (
@@ -28,7 +64,6 @@ function App() {
           muted
           playsInline
         />
-        {/* Overlay gradient for readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
         {/* Top navigation */}
@@ -97,7 +132,6 @@ function App() {
           </div>
         </div>
 
-        {/* Bottom gradient edge */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#0a0a0b] z-10" />
       </header>
 
@@ -106,22 +140,34 @@ function App() {
         <div className="mx-auto max-w-6xl px-4">
           <h3 className="text-3xl md:text-4xl font-extrabold mb-6">О группе</h3>
           <p className="text-white/80 text-lg leading-relaxed max-w-3xl">
-            Bir Manat Band — это команда профессиональных музыкантов из Баку. Наш репертуар
-            охватывает рок, поп, соул и фанк: от тонких нюансов до мощной энергетики. Мы
-            выступаем на крупных площадках и камерных событиях, настраивая программу под
-            формат и аудиторию. Главная ценность — честный live и качественный звук.
+            Мы играем живьём в барах и ресторанах, выступаем на фестивалях, свадьбах и
+            корпоративах. Наш сет подстраивается под формат события — от мягкого лаунжа до
+            мощного танцевального драйва. Главная ценность — честный live и качественный звук.
           </p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              { t: 'Репертуар', d: 'Гибкий сет с акцентом на хитах и современном звучании.' },
-              { t: 'Состав', d: 'Вокал, гитара, бас, клавиши, ударные. Возможны расширения.' },
-              { t: 'Звук', d: 'Тщательная подготовка, саундчек, работа с площадкой.' },
-            ].map((card, i) => (
-              <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-5 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                <p className="text-amber-300 font-semibold mb-1">{card.t}</p>
-                <p className="text-white/80 text-sm">{card.d}</p>
-              </div>
-            ))}
+
+          {/* Lineup */}
+          <div className="mt-10">
+            <h4 className="text-amber-300 font-semibold tracking-wide mb-4">Состав</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {lineup.map((p, i) => (
+                <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                  <p className="font-bold">{p.name}</p>
+                  <p className="text-white/70 text-sm">{p.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Gallery */}
+          <div className="mt-12">
+            <h4 className="text-amber-300 font-semibold tracking-wide mb-4">Галерея</h4>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {gallery.map((src, i) => (
+                <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-lg border border-white/10 bg-black">
+                  <img src={src} alt={`Bir Manat Band photo ${i+1}`} className="h-full w-full object-cover hover:scale-105 transition-transform duration-500" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -130,23 +176,36 @@ function App() {
       <section id="videos" className="relative py-16 md:py-24 bg-[#0c0c0d]">
         <div className="mx-auto max-w-6xl px-4">
           <h3 className="text-3xl md:text-4xl font-extrabold mb-6">Видео</h3>
-          <p className="text-white/70 mb-8">Фрагменты живых выступлений и студийных сессий.</p>
+          <p className="text-white/70 mb-8">YouTube, Instagram, TikTok — bir_manat_band. После концертов добавляем фотоотчёты.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[ 
-              'https://www.youtube.com/embed/2vjPBrBU-TM?si=live',
-              'https://www.youtube.com/embed/JGwWNGJdvx8?si=live',
-              'https://www.youtube.com/embed/KQ6zr6kCPj8?si=live',
-            ].map((src, i) => (
-              <div key={i} className="relative aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
-                <iframe
-                  className="absolute inset-0 h-full w-full"
-                  src={src}
-                  title={`Bir Manat Band Video ${i+1}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+            {videoItems.map((v, i) => (
+              <div key={i} className="group rounded-lg border border-white/10 bg-white/5 overflow-hidden">
+                {v.type === 'youtube' ? (
+                  <div className="relative aspect-video bg-black">
+                    <iframe
+                      className="absolute inset-0 h-full w-full"
+                      src={`https://www.youtube.com/embed/${v.id}`}
+                      title={`Bir Manat Band Video ${i+1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <a href={v.url} target="_blank" rel="noreferrer" className="block">
+                    <div className="relative aspect-video bg-gradient-to-br from-red-600/40 to-amber-400/30 flex items-center justify-center">
+                      <span className="text-sm font-bold bg-black/50 px-3 py-1 rounded-full">{v.platform}</span>
+                    </div>
+                  </a>
+                )}
+                <div className="p-4 border-t border-white/10">
+                  <p className="font-semibold">{v.venue} · {v.city}</p>
+                  <p className="text-white/60 text-sm">{v.date}</p>
+                </div>
               </div>
             ))}
+          </div>
+          <div className="mt-6">
+            <a href="#shows" className="inline-flex rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition-colors">Смотреть афишу</a>
           </div>
         </div>
       </section>
@@ -155,26 +214,53 @@ function App() {
       <section id="shows" className="relative py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4">
           <h3 className="text-3xl md:text-4xl font-extrabold mb-6">Концерты</h3>
-          <p className="text-white/70 mb-6">Следите за анонсами — расписание обновляется.</p>
-          <div className="space-y-3">
-            {[
-              { date: 'ПТ · 22 Ноя', city: 'Баку', venue: 'The Club Venue', note: 'Ночной сет' },
-              { date: 'СБ · 14 Дек', city: 'Баку', venue: 'City Stage', note: 'Фестиваль' },
-              { date: 'СКОРО', city: '—', venue: 'Частные мероприятия', note: 'Бронирование доступно' },
-            ].map((s, i) => (
-              <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between rounded-lg border border-white/10 bg-white/5 p-4 gap-3">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 rounded-md bg-gradient-to-br from-red-600 to-amber-500" />
-                  <div>
-                    <p className="text-lg font-bold">{s.date} · {s.city}</p>
-                    <p className="text-white/70 text-sm">{s.venue} — {s.note}</p>
+
+          <div className="mb-8">
+            <h4 className="text-amber-300 font-semibold tracking-wide mb-3">Афиша</h4>
+            <div className="space-y-3">
+              {upcoming.map((s, i) => (
+                <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between rounded-lg border border-white/10 bg-white/5 p-4 gap-3">
+                  <div className="flex items-center gap-4">
+                    <div className="h-10 w-10 rounded-md bg-gradient-to-br from-red-600 to-amber-500" />
+                    <div>
+                      <p className="text-lg font-bold">{s.date} · {s.city}</p>
+                      <p className="text-white/70 text-sm">{s.venue}</p>
+                    </div>
+                  </div>
+                  <a href="#contacts" className="inline-flex items-center justify-center rounded-md bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition-colors">
+                    Бронировать
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-amber-300 font-semibold tracking-wide mb-3">Прошедшие</h4>
+            <div className="space-y-3">
+              {past.map((s, i) => (
+                <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between rounded-lg border border-white/10 bg-white/5 p-4 gap-3">
+                  <div className="flex items-center gap-4">
+                    <div className="h-10 w-10 rounded-md bg-gradient-to-br from-amber-500 to-red-600" />
+                    <div>
+                      <p className="text-lg font-bold">{s.date} · {s.city}</p>
+                      <p className="text-white/70 text-sm">{s.venue}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {s.links.photos && (
+                      <a href={s.links.photos} className="rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm hover:bg-white/20">Фотоотчёт</a>
+                    )}
+                    {s.links.youtube && (
+                      <a href={s.links.youtube} className="rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm hover:bg-white/20">YouTube</a>
+                    )}
+                    {s.links.instagram && (
+                      <a href={s.links.instagram} className="rounded-md border border-white/15 bg-white/10 px-3 py-2 text-sm hover:bg-white/20">Instagram</a>
+                    )}
                   </div>
                 </div>
-                <a href="#contacts" className="inline-flex items-center justify-center rounded-md bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition-colors">
-                  Бронировать
-                </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -184,35 +270,24 @@ function App() {
         <div className="mx-auto max-w-6xl px-4">
           <h3 className="text-3xl md:text-4xl font-extrabold mb-6">Райдеры</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-lg border border-white/10 bg-white/5 p-6">
-              <h4 className="text-amber-300 font-semibold text-lg mb-2">Технический райдер</h4>
-              <ul className="list-disc list-inside text-white/80 text-sm space-y-1">
-                <li>Пульт не ниже 24 каналов, 4 монитора, DI-боксы</li>
-                <li>Сцена от 6×4 м, электропитание 220V</li>
-                <li>Время саундчека: 60–90 минут</li>
-              </ul>
-              <a
-                href="#contacts"
-                className="mt-4 inline-flex rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition-colors"
-              >
-                Запросить PDF
-              </a>
-            </div>
-
-            <div className="rounded-lg border border-white/10 bg-white/5 p-6">
-              <h4 className="text-amber-300 font-semibold text-lg mb-2">Гостевой райдер</h4>
-              <ul className="list-disc list-inside text-white/80 text-sm space-y-1">
-                <li>Гримерка на 5 человек, вода, чай/кофе</li>
-                <li>Парковка/пропуск для транспорта</li>
-                <li>Представитель площадки на связи</li>
-              </ul>
-              <a
-                href="#contacts"
-                className="mt-4 inline-flex rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition-colors"
-              >
-                Запросить PDF
-              </a>
-            </div>
+            {[
+              { title: 'Технический райдер — в пределах Баку', desc: 'Полный список оборудования для городских площадок.' },
+              { title: 'Бытовой райдер — в пределах Баку', desc: 'Комфортные условия для команды и подготовка к сету.' },
+              { title: 'Технический райдер — за пределами Баку', desc: 'Транспорт, площадка, локальный бэклайн.' },
+              { title: 'Бытовой райдер — за пределами Баку', desc: 'Проживание, питание, тайминг и логистика.' },
+            ].map((block, i) => (
+              <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-6">
+                <h4 className="text-amber-300 font-semibold text-lg mb-2">{block.title}</h4>
+                <p className="text-white/80 text-sm">{block.desc}</p>
+                <button
+                  disabled
+                  className="mt-4 inline-flex cursor-not-allowed rounded-md border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white/70"
+                  title="PDF будет добавлен позже"
+                >
+                  Скачать PDF
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -234,7 +309,7 @@ function App() {
               Telegram
             </a>
             <a
-              href="https://instagram.com/birmanatband"
+              href="https://instagram.com/bir_manat_band"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-5 py-3 font-semibold hover:bg-white/20 transition-colors"
